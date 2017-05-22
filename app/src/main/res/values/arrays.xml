@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hehe">
+        <item >你好</item>
+        <item >阳光</item>
+        <item >波利</item>
+        <item >海苔</item>
+    </string-array>
+</resources>
