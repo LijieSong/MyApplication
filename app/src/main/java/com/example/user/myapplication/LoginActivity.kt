@@ -1,13 +1,21 @@
 package com.example.user.myapplication
 
+import android.Manifest
+import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
+import com.example.user.utils.permission.MPermission
 import com.example.user.utils.sys.Validator
+import com.tencent.smtt.sdk.QbSdk
+import com.example.user.utils.permission.annotation.OnMPermissionDenied
+import com.example.user.utils.permission.annotation.OnMPermissionGranted
+
 
 /**
  * A login screen that offers login via email/password.
@@ -22,9 +30,14 @@ class LoginActivity : AppCompatActivity() {
     private var mPasswordView: EditText? = null
     private var mProgressView: View? = null
     private var mLoginFormView: View? = null
+    private val BASIC_PERMISSION_REQUEST_CODE = 100
+
+    @TargetApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
+        requestBasicPermission()
+        QbSdk.initX5Environment(applicationContext,null)
         // Set up the login form.
         mEmailView = findViewById(R.id.email) as AutoCompleteTextView
         mPasswordView = findViewById(R.id.password) as EditText
@@ -117,6 +130,34 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isPasswordValid(password: String): Boolean {
         return Validator.isPassword(password)
+    }
+
+    /**
+     * 基本权限管理
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun requestBasicPermission() {
+        /**
+         * Manifest.permission.RECORD_AUDIO,
+         * Manifest.permission.ACCESS_COARSE_LOCATION,
+         * Manifest.permission.ACCESS_FINE_LOCATION
+         */
+        MPermission.with(this@LoginActivity)
+                .addRequestCode(BASIC_PERMISSION_REQUEST_CODE)
+                .permissions(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.GET_ACCOUNTS,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.READ_PHONE_STATE
+                )
+                .request()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        MPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
     }
 }
 

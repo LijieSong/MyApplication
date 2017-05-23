@@ -67,7 +67,6 @@ class SecondActivity : AppCompatActivity() ,ImageAdapter.OnRemoveListener{
     }
 
     private fun ShowBigImage(item: String){
-//        startActivity(Intent(SecondActivity@this,ThirdActivity::class.java))
         val service = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val width = service.defaultDisplay.width
         val height = service.defaultDisplay.height

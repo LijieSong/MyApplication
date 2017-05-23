@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -35,6 +35,7 @@ dependencies {
     compile 'com.github.DaysLater:AndroidUtils:v1.6'
     //节操
     compile 'fm.jiecao:jiecaovideoplayer:3.1'
+    compile files('libs/tbswebview.jar')
 }
 repositories {
     jcenter()
