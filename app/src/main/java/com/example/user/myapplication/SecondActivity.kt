@@ -2,6 +2,7 @@ package com.example.user.myapplication
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +28,10 @@ class SecondActivity : AppCompatActivity() ,ImageAdapter.OnRemoveListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+        val mActionBar = supportActionBar
+        mActionBar!!.setHomeButtonEnabled(true)
+        mActionBar.setDisplayHomeAsUpEnabled(true)
+        mActionBar.title = "图片详情"
         getData()
         initView()
     }
@@ -62,6 +67,7 @@ class SecondActivity : AppCompatActivity() ,ImageAdapter.OnRemoveListener{
     }
 
     private fun ShowBigImage(item: String){
+//        startActivity(Intent(SecondActivity@this,ThirdActivity::class.java))
         val service = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val width = service.defaultDisplay.width
         val height = service.defaultDisplay.height
@@ -74,5 +80,9 @@ class SecondActivity : AppCompatActivity() ,ImageAdapter.OnRemoveListener{
         val dialog = builder.show()
         dialog.setOnDismissListener { dialog ->   dialog.dismiss() }
         imageView.setOnClickListener(View.OnClickListener { dialog.dismiss() })
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 }

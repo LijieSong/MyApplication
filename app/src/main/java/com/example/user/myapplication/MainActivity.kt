@@ -10,7 +10,6 @@ import com.alibaba.fastjson.JSONObject
 import com.example.user.utils.request.okhttp.OKHttpUtils
 import com.example.user.utils.request.okhttp.Param
 import com.example.user.utils.weight.swipyrefresh.SwipyRefreshLayout
-import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +24,8 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val mActionBar = supportActionBar
+        mActionBar!!.title = "图片列表"
         initView()
     }
 
@@ -118,7 +119,6 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
 
     override fun onLoad(p0: Int) {
         getData(p0.plus(1),Contants.TYPE)
-        toast(p0.plus(1).toString())
     }
 
     override fun onRefresh(p0: Int) {

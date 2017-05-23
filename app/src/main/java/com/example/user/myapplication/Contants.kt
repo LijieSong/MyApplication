@@ -10,9 +10,12 @@ package com.example.user.myapplication
 object Contants {
     val APPID = "29292"
     val SECRET = "9af20a809571422f8411a649fa10b427"
-    val URl = "http://route.showapi.com/852-2"
+    val URl = "http://route.showapi.com/852-2"//图片地址
+    val VIDEOURl = "http://route.showapi.com/1369-1"//视频地址
     val KEY_JSONOBJECT = "IMAGE_JSON"
+    val KEY_JSONOBJECTVIDEO = "VIDEO_JSON"
     // type 对应的类型 4001 清纯 4002 气质 4003 萌女 4004 校花 4005 婚纱 4006 街拍 4007 非主流 4008 美腿 4009 性感
     val TYPE = 4008 //美腿
     val ID = 1
+    val HTMLURl = "https://m.panda.tv/room.html?roomid="
 }

@@ -1,19 +1,18 @@
 package com.example.user.myapplication
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import com.example.user.utils.sys.Validator
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity() {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -75,10 +74,42 @@ class LoginActivity : AppCompatActivity(){
         if (cancel) {
             focusView!!.requestFocus()
         } else {
-            startActivity(Intent(LoginActivity@this,MainActivity::class.java))
-            finish()
+            showCheckDialog()
         }
     }
+
+    private fun showCheckDialog() {
+        val view = View.inflate(this, R.layout.login_check, null)
+        val group = view.findViewById(R.id.rg_all) as RadioGroup
+        val tv_ok = view.findViewById(R.id.tv_ok) as TextView
+        val tv_cancel = view.findViewById(R.id.tv_cancel) as TextView
+        var type: Int? = 1
+        group.check(R.id.rb_image)
+        group.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.rb_image) {
+                type = 1
+            } else {
+                type = 2
+            }
+        }
+        val builder = AlertDialog.Builder(LoginActivity@ this)
+        builder.setView(view)
+        val dialog = builder.show()
+        tv_ok.setOnClickListener {
+            dialog.dismiss()
+            if (type == 1) {
+                startActivity(Intent(LoginActivity@ this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(LoginActivity@ this, VideoActivity::class.java))
+            }
+            finish()
+        }
+        tv_cancel.setOnClickListener {
+            dialog.dismiss()
+            type = 1
+        }
+    }
+
 
     private fun isEmailValid(email: String): Boolean {
         return Validator.isEmailStr(email)
