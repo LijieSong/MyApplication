@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
         requestBasicPermission()
-        QbSdk.initX5Environment(applicationContext,null)
         // Set up the login form.
         mEmailView = findViewById(R.id.email) as AutoCompleteTextView
         mPasswordView = findViewById(R.id.password) as EditText
@@ -87,7 +86,9 @@ class LoginActivity : AppCompatActivity() {
         if (cancel) {
             focusView!!.requestFocus()
         } else {
-            showCheckDialog()
+            startActivity(Intent(LoginActivity@ this, MainActivity::class.java))
+            finish()
+//            showCheckDialog()
         }
     }
 

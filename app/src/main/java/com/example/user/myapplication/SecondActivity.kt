@@ -1,19 +1,13 @@
 package com.example.user.myapplication
 
 import android.annotation.TargetApi
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import com.alibaba.fastjson.JSONArray
-import com.example.user.utils.media.GildeTools.GlideUtils
 import com.example.user.utils.weight.numal.ListSlideView
-import org.jetbrains.anko.AlertDialogBuilder
-import uk.co.senab.photoview.PhotoView
 
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -67,18 +61,21 @@ class SecondActivity : AppCompatActivity() ,ImageAdapter.OnRemoveListener{
     }
 
     private fun ShowBigImage(item: String){
-        val service = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val width = service.defaultDisplay.width
-        val height = service.defaultDisplay.height
-        val builder = AlertDialogBuilder(ctx = this).builder
-        val imageView = PhotoView(this)
-        imageView.minimumWidth = width
-        imageView.minimumHeight = height
-        builder.setView(imageView)
-        GlideUtils.downLoadRoundTransform(this,item,imageView,R.color.white,R.mipmap.ic_launcher)
-        val dialog = builder.show()
-        dialog.setOnDismissListener { dialog ->   dialog.dismiss() }
-        imageView.setOnClickListener(View.OnClickListener { dialog.dismiss() })
+        val intent = Intent(SecondActivity@ this, ShowBigImageActivity::class.java)
+        intent.putExtra("url",item)
+        startActivity(intent)
+//        val service = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+//        val width = service.defaultDisplay.width
+//        val height = service.defaultDisplay.height
+//        val builder = AlertDialogBuilder(ctx = this).builder
+//        val imageView = PhotoView(this)
+//        imageView.minimumWidth = width
+//        imageView.minimumHeight = height
+//        builder.setView(imageView)
+//        GlideUtils.downLoadRoundTransform(this,item,imageView,R.color.white,R.mipmap.ic_launcher)
+//        val dialog = builder.show()
+//        dialog.setOnDismissListener { dialog ->   dialog.dismiss() }
+//        imageView.setOnClickListener(View.OnClickListener { dialog.dismiss() })
     }
     override fun onSupportNavigateUp(): Boolean {
         finish()

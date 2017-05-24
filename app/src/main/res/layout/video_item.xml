@@ -4,60 +4,57 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingBottom="10dp"
-    android:paddingRight="-90dp"
+    android:paddingRight="-20dp"
     android:paddingTop="10dp">
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/iv_cover"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/iv_cover"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_theme"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_cover"
-            android:orientation="vertical">
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="哈哈哈啊"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center|left"
-                android:text="哈哈哈啊"
-                android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="哈哈哈啊"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tv_publisher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center|left"
-                android:text="哈哈哈啊"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_peoples"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:gravity="center|left"
-                android:text="12人"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_peoples"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="12人"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvDelete"

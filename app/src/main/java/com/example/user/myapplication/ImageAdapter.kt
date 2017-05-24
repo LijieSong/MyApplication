@@ -27,11 +27,11 @@ class ImageAdapter(val items: MutableList<String>?, val context: Context) : Base
             v.tag = holder
         } else {
             v = convertView
-            holder = v.tag  as ImageAdapter.ViewHolder
+            holder = v.tag as ImageAdapter.ViewHolder
         }
-        GlideUtils.downLoadRoundTransform(context,items!![position],holder.iv_item,R.mipmap.ic_launcher,R.mipmap.ic_launcher)
+        GlideUtils.downLoadRoundTransform(context, items!![position], holder.iv_item, R.color.white, R.color.white)
         holder.tvDelete.setOnClickListener(View.OnClickListener {
-            if (mRemoveListener!! !=null){
+            if (mRemoveListener!! != null) {
                 mRemoveListener!!.onRemoveItem(position)
             }
         })
@@ -39,20 +39,22 @@ class ImageAdapter(val items: MutableList<String>?, val context: Context) : Base
     }
 
     override fun getItem(position: Int): Any {
-        return  items!!.get(position)
+        return items!!.get(position)
     }
 
     override fun getItemId(position: Int): Long {
-        return  position.toLong()
+        return position.toLong()
     }
 
     override fun getCount(): Int {
-        return  items!!.size
+        return items!!.size
     }
+
     class ViewHolder(viewItem: View) {
         var iv_item: ImageView = viewItem.findViewById(R.id.iv_item) as ImageView
         var tvDelete: TextView = viewItem.findViewById(R.id.tvDelete) as TextView
     }
+
     interface OnRemoveListener {
         fun onRemoveItem(position: Int)
     }

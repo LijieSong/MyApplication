@@ -14,12 +14,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefreshLayout.OnRefreshListener {
+class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener, SwipyRefreshLayout.OnRefreshListener {
 
 
-    private  var listView : ListSlideView? = null
-    private var srl_refresh : SwipyRefreshLayout? =null
-    private var adapter : ItemAdapter ?=null
+    private var listView: ListSlideView? = null
+    private var srl_refresh: SwipyRefreshLayout? = null
+    private var adapter: ItemAdapter? = null
     private var items = mutableListOf<JSONObject>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
     private fun initView() {
         listView = findViewById(R.id.list_item) as ListSlideView
         srl_refresh = findViewById(R.id.srl_refresh) as SwipyRefreshLayout
-        getData(Contants.ID,Contants.TYPE)
-        adapter = ItemAdapter(items,this)
+        getData(Contants.ID, Contants.TYPE)
+        adapter = ItemAdapter(items, this)
         listView!!.adapter = adapter
         listView!!.setOnItemClickListener { parent, view, position, id ->
             val item = items!!.get(position)
-            startActivity(Intent(MainActivity@this, SecondActivity::class.java).putExtra("hehe",item.getJSONArray("list").toJSONString()))
+            startActivity(Intent(MainActivity@ this, SecondActivity::class.java).putExtra("hehe", item.getJSONArray("list").toJSONString()))
         }
         adapter!!.setRemoveListener(this)
         srl_refresh!!.setOnRefreshListener(this)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
         listView!!.slideBack()
     }
 
-    private fun getData(id: Int,type :Int) {
+    private fun getData(id: Int, type: Int) {
         val format = SimpleDateFormat("yyyyMMddHHmmss")
         val format1 = format.format(Date())
         val params = ArrayList<Param>()
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
                         val showapi_res_body = jsonObject.getJSONObject("showapi_res_body")
                         if (showapi_res_body != null || showapi_res_body!!.size !== 0) {
                             val pagebean = showapi_res_body!!.getJSONObject("pagebean")
-                            ACache.get(this@MainActivity).put(Contants.KEY_JSONOBJECT + Contants.ID, pagebean)
+                            ACache.get(this@MainActivity).put(Contants.KEY_JSONOBJECT + id, pagebean)
                             if (pagebean != null || pagebean!!.size !== 0) {
                                 val contentlist = pagebean!!.getJSONArray("contentlist")
                                 if (contentlist != null || contentlist!!.size !== 0) {
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
                         adapter!!.notifyDataSetChanged()
                     }
                     else -> {
-                        val jsonObject1 = ACache.get(this@MainActivity).getAsJSONObject(Contants.KEY_JSONOBJECT +  Contants.ID)
+                        val jsonObject1 = ACache.get(this@MainActivity).getAsJSONObject(Contants.KEY_JSONOBJECT + id)
                         if (jsonObject1 != null) {
                             val contentlist = jsonObject1.getJSONArray("contentlist")
                             if (contentlist != null || contentlist!!.size !== 0) {
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
             }
 
             override fun onFailure(errorMsg: String) {
-                val jsonObject1 = ACache.get(this@MainActivity).getAsJSONObject(Contants.KEY_JSONOBJECT +  Contants.ID)
+                val jsonObject1 = ACache.get(this@MainActivity).getAsJSONObject(Contants.KEY_JSONOBJECT + id)
                 if (jsonObject1 != null || jsonObject1!!.size !== 0) {
                     val contentlist = jsonObject1!!.getJSONArray("contentlist")
                     if (contentlist != null || contentlist!!.size !== 0) {
@@ -113,17 +113,17 @@ class MainActivity : AppCompatActivity(), ItemAdapter.OnRemoveListener,SwipyRefr
                 adapter!!.notifyDataSetChanged()
             }
         })
-        srl_refresh!!.isRefreshing =false
+        srl_refresh!!.isRefreshing = false
     }
 
 
     override fun onLoad(p0: Int) {
-        getData(p0.plus(1),Contants.TYPE)
+        getData(p0.plus(1), Contants.TYPE)
     }
 
     override fun onRefresh(p0: Int) {
         items.clear()
-        getData(1,Contants.TYPE)
+        getData(1, Contants.TYPE)
     }
 
 }

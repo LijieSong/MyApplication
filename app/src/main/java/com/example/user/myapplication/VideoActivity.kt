@@ -2,8 +2,6 @@ package com.example.user.myapplication
 
 import android.Manifest
 import android.annotation.TargetApi
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +9,6 @@ import android.widget.Toast
 import com.alibaba.fastjson.JSONObject
 import com.example.user.utils.acache.ACache
 import com.example.user.utils.permission.MPermission
-import com.example.user.utils.permission.annotation.OnMPermissionDenied
-import com.example.user.utils.permission.annotation.OnMPermissionGranted
 import com.example.user.utils.request.okhttp.OKHttpUtils
 import com.example.user.utils.request.okhttp.Param
 import com.example.user.utils.weight.numal.ListSlideView
@@ -50,10 +46,6 @@ class VideoActivity : AppCompatActivity(), SwipyRefreshLayout.OnRefreshListener,
         adapter = VideoAdapter(items, this)
         listView!!.adapter = adapter
         listView!!.setOnItemClickListener { parent, view, position, id ->
-//            val item = items!!.get(position)
-//            val roomId = item.getString("id")
-//            startActivity(Intent(VideoActivity@ this, ThirdActivity::class.java).putExtra("roomId", roomId))
-            startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(Contants.HTMLURl+ items!![position].getString("id"))))
         }
         adapter!!.setRemoveListener(this)
         srl_refresh!!.setOnRefreshListener(this)
